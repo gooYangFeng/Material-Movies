@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -114,7 +115,7 @@ public class MoviesActivity extends ActionBarActivity implements
             getFragmentManager().findFragmentById(R.id.navigation_drawer);
 
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
-            (DrawerLayout) findViewById(R.id.drawer_layout));
+                (DrawerLayout) findViewById(R.id.drawer_layout));
     }
 
     private void initializeToolbar() {
@@ -182,7 +183,7 @@ public class MoviesActivity extends ActionBarActivity implements
     public void showLoadingLabel() {
 
         Snackbar loadingSnackBar = Snackbar.with(this)
-            .text(getString(R.string.activity_movies_message_more_films))
+            .text(getString(R.string.nav_header_login))
             .actionLabel(getString(R.string.action_cancel))
             .duration(Snackbar.SnackbarDuration.LENGTH_INDEFINITE)
             .color(getResources().getColor(R.color.theme_primary))
@@ -211,32 +212,45 @@ public class MoviesActivity extends ActionBarActivity implements
 
     @Override
     public void onClick(View touchedView, int moviePosition, float touchedX, float touchedY) {
-
-        Intent movieDetailActivityIntent = new Intent (
-            MoviesActivity.this, MovieDetailActivity.class);
-
-        String movieID = mMoviesAdapter.getMovieList().get(moviePosition).getId();
-        movieDetailActivityIntent.putExtra(EXTRA_MOVIE_ID, movieID);
-        movieDetailActivityIntent.putExtra(EXTRA_MOVIE_POSITION, moviePosition);
-
-        ImageView mCoverImage = (ImageView) touchedView.findViewById(R.id.item_movie_cover);
-        BitmapDrawable bitmapDrawable = (BitmapDrawable) mCoverImage.getDrawable();
-
-        if (mMoviesAdapter.isMovieReady(moviePosition) || bitmapDrawable != null) {
-
-            sPhotoCache.put(0, bitmapDrawable.getBitmap());
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-                startDetailActivityBySharedElements(touchedView, moviePosition,
-                    movieDetailActivityIntent);
-            else
-                startDetailActivityByAnimation(touchedView, (int) touchedX,
-                    (int) touchedY, movieDetailActivityIntent);
-
+        int viewId = touchedView.getId();
+        Movie selectMovie = mMoviesAdapter.getMovieList().get(moviePosition);
+        if (viewId == R.id.app_item_download_formal) {
+            startDownload(selectMovie.getFormalApkUrl());
+            return;
+        } else if (viewId == R.id.app_item_download_developing) {
+            if (checkAndLogin()) {
+                startDownload(selectMovie.getDevelopingApkUrl());
+                return;
+            } else {
+                showLoadingLabel();
+            }
         } else {
-
-            Toast.makeText(this, getString(R.string.activity_movies_message_loading_film),
-                Toast.LENGTH_SHORT).show();
+//        Intent movieDetailActivityIntent = new Intent (
+//            MoviesActivity.this, MovieDetailActivity.class);
+//
+//        String movieID = mMoviesAdapter.getMovieList().get(moviePosition).getId();
+//        movieDetailActivityIntent.putExtra(EXTRA_MOVIE_ID, movieID);
+//        movieDetailActivityIntent.putExtra(EXTRA_MOVIE_POSITION, moviePosition);
+//
+//        ImageView mCoverImage = (ImageView) touchedView.findViewById(R.id.item_movie_cover);
+//        BitmapDrawable bitmapDrawable = (BitmapDrawable) mCoverImage.getDrawable();
+//
+//        if (mMoviesAdapter.isMovieReady(moviePosition) || bitmapDrawable != null) {
+//
+//            sPhotoCache.put(0, bitmapDrawable.getBitmap());
+//
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+//                startDetailActivityBySharedElements(touchedView, moviePosition,
+//                    movieDetailActivityIntent);
+//            else
+//                startDetailActivityByAnimation(touchedView, (int) touchedX,
+//                    (int) touchedY, movieDetailActivityIntent);
+//
+//        } else {
+//
+//            Toast.makeText(this, getString(R.string.activity_movies_message_loading_film),
+//                Toast.LENGTH_SHORT).show();
+//        }
         }
     }
 
@@ -337,5 +351,15 @@ public class MoviesActivity extends ActionBarActivity implements
 
         super.onStop();
         mMoviesPresenter.stop();
+    }
+
+    private boolean checkAndLogin() {
+        // todo: login as toogoo expert account
+        return false;
+    }
+
+    private void startDownload(String url) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(intent);
     }
 }

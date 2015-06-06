@@ -16,6 +16,25 @@ public class Movie implements Serializable {
     private String title;
     private String vote_average;
     private String vote_count;
+
+    public String getApkUrl() {
+        return apkUrl;
+    }
+
+    public void setApkUrl(String apkUrl) {
+        this.apkUrl = apkUrl;
+    }
+
+    private String apkUrl;
+
+    public String getOverview() {
+        return overview;
+    }
+
+    public void setOverview(String overview) {
+        this.overview = overview;
+    }
+
     private String overview;
     private boolean movieReady;
 
@@ -84,5 +103,23 @@ public class Movie implements Serializable {
     public boolean isMovieReady() {
 
         return movieReady;
+    }
+
+    private static final int START_ID = 4;
+    private static final String FORMAL_APK_URL_PREFIX = "http://taogu91.oss-cn-qingdao.aliyuncs.com/download/%s$1_Patient.apk";
+    private static final String DEVELOP_APK_URL = "http://taogu91.oss-cn-qingdao.aliyuncs.com/download/DEV_%s$1_Patient.apk";
+    private static final String
+    public static String instanceId(int index) {
+        return String.valueOf(START_ID + index);
+    }
+
+    public String getFormalApkUrl() {
+        if ("2".equalsIgnoreCase(id)) {
+            return "http://taogu91.oss-cn-qingdao.aliyuncs.com/download/Patient.apk";
+        }
+        return String.format(FORMAL_APK_URL, id);
+    }
+    public String getDevelopingApkUrl() {
+        return String.format(DEVELOP_APK_URL, id);
     }
 }

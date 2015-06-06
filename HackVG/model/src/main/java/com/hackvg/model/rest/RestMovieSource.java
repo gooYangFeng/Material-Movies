@@ -4,10 +4,14 @@ package com.hackvg.model.rest;
 import com.hackvg.common.utils.Constants;
 import com.hackvg.model.entities.ConfigurationResponse;
 import com.hackvg.model.entities.ImagesWrapper;
+import com.hackvg.model.entities.Movie;
 import com.hackvg.model.entities.MovieDetail;
 import com.hackvg.model.entities.MoviesWrapper;
 import com.hackvg.model.entities.ReviewsWrapper;
 import com.squareup.otto.Bus;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -43,14 +47,14 @@ public class RestMovieSource implements RestDataSource {
     public void getDetailMovie(String id) {
 
         moviesDBApi.getMovieDetail(Constants.API_KEY, id,
-            retrofitCallback);
+                retrofitCallback);
     }
 
     @Override
     public void getReviews(String id) {
 
         moviesDBApi.getReviews(Constants.API_KEY, id,
-            retrofitCallback);
+                retrofitCallback);
     }
 
     @Override
@@ -63,7 +67,7 @@ public class RestMovieSource implements RestDataSource {
     public void getImages(String movieId) {
 
         moviesDBApi.getImages(Constants.API_KEY, movieId,
-            retrofitCallback);
+                retrofitCallback);
     }
 
     public Callback retrofitCallback = new Callback() {
@@ -107,10 +111,43 @@ public class RestMovieSource implements RestDataSource {
     @Override
     public void getMoviesByPage(int page) {
 
-        moviesDBApi.getPopularMoviesByPage(
-            Constants.API_KEY,
-            page + "",
-            retrofitCallback
-        );
+//        moviesDBApi.getPopularMoviesByPage(
+//            Constants.API_KEY,
+//            page + "",
+//            retrofitCallback
+//        );
+        MoviesWrapper wrapper;
+        if (1 == page) {
+            wrapper = new MoviesWrapper(movieList);
+        } else {
+            wrapper = new MoviesWrapper(emptyList);
+        }
+
+        retrofitCallback.success(wrapper, null);
+    }
+
+    private static final String[] TITLES = new String[] {
+            "新乡市中心医院",
+            "安阳市中医院",
+            "商丘市第一人民医院",
+            "驻马店市第一人民医院",
+            "平顶山市第一人民医院",
+    };
+    private static final String[] IMAGES = new String[] {
+            "http://taogu91.oss-cn-qingdao.aliyuncs.com/hospital_image/1432103365156xOrVLjbk.jpg",
+            "http://taogu91.oss-cn-qingdao.aliyuncs.com/hospital_image/1432120532452tBUmhDfO.png",
+            "http://taogu91.oss-cn-qingdao.aliyuncs.com/hospital_image/1432204496071TmjbjwkQ.png",
+            "http://taogu91.oss-cn-qingdao.aliyuncs.com/image_upload_plugin_image/1429187163420iOVgfjqR.jpg",
+            "http://taogu91.oss-cn-qingdao.aliyuncs.com/hospital_image/1433303972523WstgAtEv.jpg",
+    };
+
+    private static List<Movie> movieList;
+    private static List<Movie> emptyList = new ArrayList<Movie>();
+    static {
+        movieList = new ArrayList<Movie>();
+        for (int i = 0; i < TITLES.length; i++) {
+            Movie movie = new Movie(Movie.instanceId(i), TITLES[i], IMAGES[i]);
+            movieList.add(movie);
+        }
     }
 }

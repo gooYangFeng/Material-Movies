@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Material Movies</string>
+    <string name="app_name">"@桃谷"</string>
 
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc mollis nunc massa, quis suscipit orci mattis a. Nulla rutrum fringilla finibus. Morbi ac dui in lacus finibus hendrerit. Ut vestibulum. Nulla rutrum fringilla finibus. Morbi ac dui in lacus finibus hendrerit. Ut vestibulum. Nulla rutrum fringilla finibus. Morbi ac dui in lacus finibus hendrerit. Ut vestibulum, Nulla rutrum fringilla finibus. Morbi ac dui in lacus finibus hendrerit. Ut vestibulum, Morbi ac dui in lacus finibus hendrerit. Ut vestibulum, Nulla rutrum fringilla finibus. Morbi ac dui in lacus finibus hendrerit. Ut vestibulum, Ut vestibulum, Nulla rutrum fringilla finibus. Morbi ac dui in lacus finibus hendrerit. Ut vestibulum, Morbi ac dui in lacus finibus hendrerit. Ut vestibulum, Nulla rutrum fringilla finibus. Morbi ac dui in lacus finibus hendrerit. Ut vestibulum</string>
     <string name="activity_detail_action_label_1">Pending</string>
@@ -45,4 +45,13 @@
     <string name="activity_movies.message.loading_film">Movie loading, please wait</string>
     <string name="activity_movies.message.more_films">Loading more films</string>
     <string name="action.cancel">Cancel</string>
+
+    <string name="nav_header_login">登录桃谷账号</string>
+    <string name="nav_header_home">应用中心</string>
+    <string name="nav_header_entertainment">休闲娱乐</string>
+
+    <string name="app_item_download_tip">Android版下载，请您点击下面按钮安装</string>
+    <string name="app_item_download_install">安装</string>
+    <string name="app_item_download_formal">正式版</string>
+    <string name="app_item_download_developing">内测版</string>
 </resources>

@@ -26,7 +26,7 @@
             android:background="@drawable/gradient_dark"
             android:paddingBottom="@dimen/activity_vertical_margin"
             android:paddingLeft="@dimen/activity_vertical_margin"
-            android:text="John M. Smith"
+            android:text="@string/nav_header_login"
             android:textSize="25sp"
             android:fontFamily="sans-serif-light"
             android:textColor="#FFF"
@@ -44,7 +44,7 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:tag="bookings"
         android:textColor="#FFF"
-        android:text="Check pending"
+        android:text="@string/nav_header_home"
         />
 
     <TextView
@@ -56,9 +56,7 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:tag="bookings"
         android:textColor="#FFF"
-        android:text="Check viewed"
+        android:text="@string/nav_header_entertainment"
         />
-
-
 
 </LinearLayout>

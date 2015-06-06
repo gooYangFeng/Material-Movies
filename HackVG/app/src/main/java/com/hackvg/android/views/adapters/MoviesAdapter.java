@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.hackvg.android.R;
 import com.hackvg.android.utils.RecyclerViewClickListener;
 import com.hackvg.model.entities.Movie;
-import com.hackvg.common.utils.Constants;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -61,7 +60,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             holder.coverImageView.setTransitionName("cover" + position);
 
-        String posterURL = Constants.BASIC_STATIC_URL + selectedMovie.getPoster_path();
+        String posterURL = selectedMovie.getOverview();
+//        String posterURL = Constants.BASIC_STATIC_URL + selectedMovie.getPoster_path();
 
         Picasso.with(mContext)
             .load(posterURL)
@@ -105,6 +105,9 @@ class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnTouchLis
     TextView authorTextView;
     ImageView coverImageView;
 
+    View formalUrlView;
+    View developingUrlView;
+
     public MovieViewHolder(View itemView, RecyclerViewClickListener onClickListener) {
 
         super(itemView);
@@ -114,6 +117,16 @@ class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnTouchLis
         coverImageView.setDrawingCacheEnabled(true);
         coverImageView.setOnTouchListener(this);
         this.onClickListener = onClickListener;
+
+        formalUrlView = itemView.findViewById(R.id.app_item_download_formal);
+        if (null != formalUrlView) {
+            formalUrlView.setOnTouchListener(this);
+        }
+
+        developingUrlView = itemView.findViewById(R.id.app_item_download_developing);
+        if (null != developingUrlView) {
+            developingUrlView.setOnTouchListener(this);
+        }
     }
 
     public void setReady(boolean ready) {
