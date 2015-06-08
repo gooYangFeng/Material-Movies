@@ -106,20 +106,23 @@ public class Movie implements Serializable {
     }
 
     private static final int START_ID = 4;
-    private static final String FORMAL_APK_URL_PREFIX = "http://taogu91.oss-cn-qingdao.aliyuncs.com/download/%s$1_Patient.apk";
-    private static final String DEVELOP_APK_URL = "http://taogu91.oss-cn-qingdao.aliyuncs.com/download/DEV_%s$1_Patient.apk";
-    private static final String
+    private static final String FORMAL_APK_URL_PREFIX = "http://taogu91.oss-cn-qingdao.aliyuncs.com/download/";
+    private static final String DEVELOP_APK_URL_PREFIX = "http://taogu91.oss-cn-qingdao.aliyuncs.com/download/DEV_";
+    private static final String CUSTOM_APK_SUFFIX = "_Patient.apk";
     public static String instanceId(int index) {
         return String.valueOf(START_ID + index);
     }
 
     public String getFormalApkUrl() {
         if ("2".equalsIgnoreCase(id)) {
+            return "http://taogu91.oss-cn-qingdao.aliyuncs.com/download/Doctor.apk";
+        } else if ("3".equalsIgnoreCase(id)) {
             return "http://taogu91.oss-cn-qingdao.aliyuncs.com/download/Patient.apk";
         }
-        return String.format(FORMAL_APK_URL, id);
+
+        return FORMAL_APK_URL_PREFIX + id + CUSTOM_APK_SUFFIX;
     }
     public String getDevelopingApkUrl() {
-        return String.format(DEVELOP_APK_URL, id);
+        return DEVELOP_APK_URL_PREFIX + id + CUSTOM_APK_SUFFIX;
     }
 }
