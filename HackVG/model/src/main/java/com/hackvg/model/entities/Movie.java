@@ -17,6 +17,18 @@ public class Movie implements Serializable {
     private String vote_average;
     private String vote_count;
 
+    private String apkUrl;
+
+    private String pkgName;
+
+    public String getPkgName() {
+        return pkgName;
+    }
+
+    public void setPkgName(String pkgName) {
+        this.pkgName = pkgName;
+    }
+
     public String getApkUrl() {
         return apkUrl;
     }
@@ -24,8 +36,6 @@ public class Movie implements Serializable {
     public void setApkUrl(String apkUrl) {
         this.apkUrl = apkUrl;
     }
-
-    private String apkUrl;
 
     public String getOverview() {
         return overview;

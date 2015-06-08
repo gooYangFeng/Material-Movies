@@ -144,6 +144,15 @@ public class RestMovieSource implements RestDataSource {
             "http://taogu91.oss-cn-qingdao.aliyuncs.com/image_upload_plugin_image/1429187163420iOVgfjqR.jpg",
             "http://taogu91.oss-cn-qingdao.aliyuncs.com/hospital_image/1433303972523WstgAtEv.jpg",
     };
+    private static final String[] PKG_NAME = new String[] {
+            "com.yht.b",
+            "com.yht.c",
+            "com.xinxiang.center",
+            "com.anyang.traditional",
+            "com.shangqiu.first",
+            "com.zhumadian.first",
+            "com.pingdingshan.first",
+    };
 
     private static List<Movie> movieList;
     private static List<Movie> emptyList = new ArrayList<Movie>();
@@ -151,6 +160,7 @@ public class RestMovieSource implements RestDataSource {
         movieList = new ArrayList<Movie>();
         for (int i = 0; i < TITLES.length; i++) {
             Movie movie = new Movie(Movie.instanceId(i), TITLES[i], IMAGES[i]);
+            movie.setPkgName(PKG_NAME[i]);
             movieList.add(movie);
         }
     }
