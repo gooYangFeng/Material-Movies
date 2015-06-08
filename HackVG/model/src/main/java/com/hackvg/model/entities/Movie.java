@@ -110,6 +110,9 @@ public class Movie implements Serializable {
     private static final String DEVELOP_APK_URL_PREFIX = "http://taogu91.oss-cn-qingdao.aliyuncs.com/download/DEV_";
     private static final String CUSTOM_APK_SUFFIX = "_Patient.apk";
     public static String instanceId(int index) {
+        if (index < START_ID) {
+            return String.valueOf(index + 2);
+        }
         return String.valueOf(START_ID + index);
     }
 
@@ -123,6 +126,12 @@ public class Movie implements Serializable {
         return FORMAL_APK_URL_PREFIX + id + CUSTOM_APK_SUFFIX;
     }
     public String getDevelopingApkUrl() {
+        if ("2".equalsIgnoreCase(id)) {
+            return "http://taogu91.oss-cn-qingdao.aliyuncs.com/download/DEV_Doctor.apk";
+        } else if ("3".equalsIgnoreCase(id)) {
+            return "http://taogu91.oss-cn-qingdao.aliyuncs.com/download/DEV_Patient.apk";
+        }
+
         return DEVELOP_APK_URL_PREFIX + id + CUSTOM_APK_SUFFIX;
     }
 }

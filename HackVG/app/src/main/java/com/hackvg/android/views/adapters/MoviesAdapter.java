@@ -3,6 +3,7 @@ package com.hackvg.android.views.adapters;
 import android.content.Context;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -63,21 +64,29 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
         String posterURL = selectedMovie.getOverview();
 //        String posterURL = Constants.BASIC_STATIC_URL + selectedMovie.getPoster_path();
 
-        Picasso.with(mContext)
-            .load(posterURL)
-            .fit().centerCrop()
-            .into(holder.coverImageView, new Callback() {
-                @Override
-                public void onSuccess() {
+        Callback callback = new Callback() {
+            @Override
+            public void onSuccess() {
 
-                    mMovieList.get(position).setMovieReady(true);
-                }
+                mMovieList.get(position).setMovieReady(true);
+            }
 
-                @Override
-                public void onError() {
+            @Override
+            public void onError() {
 
-                }
-            });
+            }
+        };
+
+        if (TextUtils.isEmpty(posterURL)) {
+            Picasso.with(mContext).load(R.color.app_placeholder)
+                    .fit().centerCrop()
+                    .into(holder.coverImageView, callback);
+        } else {
+            Picasso.with(mContext)
+                    .load(posterURL)
+                    .fit().centerCrop()
+                    .into(holder.coverImageView, callback);
+        }
     }
 
     public boolean isMovieReady(int position) {

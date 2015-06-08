@@ -6,4 +6,5 @@
     <color name="theme_window_background">#363F44</color>
 
     <color name="movie_placeholder">#ff4e5d64</color>
+    <color name="app_placeholder">#F0EFF5</color>
 </resources>

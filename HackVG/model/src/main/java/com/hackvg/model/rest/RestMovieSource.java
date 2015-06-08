@@ -127,6 +127,8 @@ public class RestMovieSource implements RestDataSource {
     }
 
     private static final String[] TITLES = new String[] {
+            "桃谷医院专家",
+            "桃谷医院",
             "新乡市中心医院",
             "安阳市中医院",
             "商丘市第一人民医院",
@@ -134,6 +136,8 @@ public class RestMovieSource implements RestDataSource {
             "平顶山市第一人民医院",
     };
     private static final String[] IMAGES = new String[] {
+            "",
+            "",
             "http://taogu91.oss-cn-qingdao.aliyuncs.com/hospital_image/1432103365156xOrVLjbk.jpg",
             "http://taogu91.oss-cn-qingdao.aliyuncs.com/hospital_image/1432120532452tBUmhDfO.png",
             "http://taogu91.oss-cn-qingdao.aliyuncs.com/hospital_image/1432204496071TmjbjwkQ.png",
