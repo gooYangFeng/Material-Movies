@@ -189,6 +189,13 @@ public class MoviesActivity extends ActionBarActivity implements
             .color(getResources().getColor(R.color.theme_primary))
             .actionColor(getResources().getColor(R.color.theme_accent));
 
+        loadingSnackBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                performLogin();
+            }
+        });
+
         SnackbarManager.show(loadingSnackBar);
     }
 
@@ -358,6 +365,9 @@ public class MoviesActivity extends ActionBarActivity implements
         return false;
     }
 
+    private void performLogin() {
+        Toast.makeText(this, "going to login", Toast.LENGTH_SHORT).show();
+    }
     private void startDownload(String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(intent);
