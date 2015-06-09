@@ -36,9 +36,10 @@ public interface MovieDatabaseAPI {
         Callback<MoviesWrapper> callback
     );
 
-    @GET("/configuration")
+    @GET("/api")
     void getConfiguration (
-        @Query("api_key") String apiKey,
+        @Query("func") String apiKey,
+        @Query("app") String appId,
         Callback<ConfigurationResponse> response
     );
 

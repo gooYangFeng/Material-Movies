@@ -27,15 +27,15 @@ public class ConfigurationUsecaseController implements ConfigurationUsecase {
     }
 
     @Override
-    public void requestConfiguration () {
+    public void requestConfiguration (int appId) {
 
-        mMediaDataSource.getConfiguration();
+        mMediaDataSource.getConfiguration(appId);
     }
 
     @Override
     public void execute() {
 
-        requestConfiguration();
+        requestConfiguration(4);
     }
 
     @Subscribe
@@ -48,27 +48,27 @@ public class ConfigurationUsecaseController implements ConfigurationUsecase {
 
     public void configureImageUrl (ConfigurationResponse configurationResponse) {
 
-        String url;
+//        String url;
 
-        if (configurationResponse.getImages() != null) {
-
-            String imageQuality = "";
-            url = configurationResponse.getImages().getBase_url();
-
-            for (String quality : configurationResponse.getImages().getBackdrop_sizes()) {
-
-                if (quality.equals(QUALITY_DESIRED)) {
-
-                    imageQuality = QUALITY_DESIRED;
-                    break;
-                }
-            }
-
-            if (imageQuality.equals(""))
-                imageQuality = QUALITY_ORIGINAL;
-
-            url += imageQuality;
-            sendConfiguredUrlToPresenter(url);
+        if (configurationResponse.getData() != null) {
+            sendConfiguredUrlToPresenter(configurationResponse.getData().getAndroid_download_url());
+//            String imageQuality = "";
+//            url = configurationResponse.getImages().getBase_url();
+//
+//            for (String quality : configurationResponse.getImages().getBackdrop_sizes()) {
+//
+//                if (quality.equals(QUALITY_DESIRED)) {
+//
+//                    imageQuality = QUALITY_DESIRED;
+//                    break;
+//                }
+//            }
+//
+//            if (imageQuality.equals(""))
+//                imageQuality = QUALITY_ORIGINAL;
+//
+//            url += imageQuality;
+//            sendConfiguredUrlToPresenter(url);
         }
     }
 

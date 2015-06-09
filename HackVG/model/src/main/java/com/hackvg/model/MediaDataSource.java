@@ -13,7 +13,7 @@ public interface MediaDataSource {
      */
     void getReviews (String id);
 
-    void getConfiguration ();
+    void getConfiguration (int appId);
 
     /**
      * Get a list of images represented by a MoviesWrapper

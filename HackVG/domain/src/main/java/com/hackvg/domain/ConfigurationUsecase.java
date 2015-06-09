@@ -12,7 +12,7 @@ public interface ConfigurationUsecase extends Usecase {
     /**
      * Request data source the configuration data
      */
-    void requestConfiguration ();
+    void requestConfiguration (int appId);
 
     /**
      * Callback used to be notified when the configuration data has been received

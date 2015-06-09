@@ -40,6 +40,6 @@ public class GetConfigurationUsecaseTest {
         configurationUsecase.execute();
 
         verify(mockDataSource, times(1))
-            .getConfiguration();
+            .getConfiguration(4);
     }
 }

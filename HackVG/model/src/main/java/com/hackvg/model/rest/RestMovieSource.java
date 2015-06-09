@@ -58,9 +58,9 @@ public class RestMovieSource implements RestDataSource {
     }
 
     @Override
-    public void getConfiguration() {
+    public void getConfiguration(int appId) {
 
-        moviesDBApi.getConfiguration(Constants.API_KEY, retrofitCallback);
+        moviesDBApi.getConfiguration(Constants.SYSTEM_CONFIG, String.valueOf(appId), retrofitCallback);
     }
 
     @Override
