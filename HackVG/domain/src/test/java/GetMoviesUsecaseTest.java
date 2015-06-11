@@ -42,7 +42,7 @@ public class GetMoviesUsecaseTest {
         getMoviesUsecase.execute();
 
         verify(mockDataSource, times(1))
-            .getMovies();
+            .getMovies("4");
 
     }
 

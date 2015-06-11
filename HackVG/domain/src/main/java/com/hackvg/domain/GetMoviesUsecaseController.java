@@ -13,7 +13,7 @@ public class GetMoviesUsecaseController implements GetMoviesUsecase {
 
     private final RestDataSource mDataSource;
     private final Bus mUiBus;
-    private int mCurrentPage = 1;
+    private int mCurrentPage = 4;
 
     /**
      * Constructor of the class.

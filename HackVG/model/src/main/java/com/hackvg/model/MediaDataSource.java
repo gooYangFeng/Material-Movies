@@ -2,7 +2,7 @@ package com.hackvg.model;
 
 public interface MediaDataSource {
 
-    void getMovies();
+    void getMovies(String appId);
 
     void getDetailMovie (String id);
 

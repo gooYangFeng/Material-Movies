@@ -17,9 +17,10 @@ import retrofit.http.Query;
  */
 public interface MovieDatabaseAPI {
 
-    @GET("/movie/popular")
+    @GET("/api")
     void getPopularMovies(
-        @Query("api_key") String apiKey,
+        @Query("func") String funcName,
+        @Query("app") String appId,
         Callback<MoviesWrapper> callback);
 
     @GET("/movie/{id}")
@@ -29,16 +30,16 @@ public interface MovieDatabaseAPI {
         Callback<MovieDetail> callback
     );
 
-    @GET("/movie/popular")
+    @GET("/api")
     void getPopularMoviesByPage(
-        @Query("api_key") String apiKey,
-        @Query("page") String page,
+        @Query("func") String funcName,
+        @Query("app") String appId,
         Callback<MoviesWrapper> callback
     );
 
     @GET("/api")
     void getConfiguration (
-        @Query("func") String apiKey,
+        @Query("func") String funcName,
         @Query("app") String appId,
         Callback<ConfigurationResponse> response
     );

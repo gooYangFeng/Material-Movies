@@ -38,9 +38,9 @@ public class RestMovieSource implements RestDataSource {
     }
 
     @Override
-    public void getMovies() {
+    public void getMovies(String appId) {
 
-        moviesDBApi.getPopularMovies(Constants.API_KEY, retrofitCallback);
+        moviesDBApi.getPopularMovies(Constants.FIRST_PAGE, String.valueOf(appId), retrofitCallback);
     }
 
     @Override
@@ -110,58 +110,49 @@ public class RestMovieSource implements RestDataSource {
 
     @Override
     public void getMoviesByPage(int page) {
-
-//        moviesDBApi.getPopularMoviesByPage(
-//            Constants.API_KEY,
-//            page + "",
-//            retrofitCallback
-//        );
-        MoviesWrapper wrapper;
-        if (1 == page) {
-            wrapper = new MoviesWrapper(movieList);
-        } else {
-            wrapper = new MoviesWrapper(emptyList);
-        }
-
-        retrofitCallback.success(wrapper, null);
+        moviesDBApi.getPopularMoviesByPage(
+            Constants.FIRST_PAGE,
+            page + "",
+            retrofitCallback
+        );
     }
 
-    private static final String[] TITLES = new String[] {
-            "桃谷医院专家",
-            "桃谷医院",
-            "新乡市中心医院",
-            "安阳市中医院",
-            "商丘市第一人民医院",
-            "驻马店市第一人民医院",
-            "平顶山市第一人民医院",
-    };
-    private static final String[] IMAGES = new String[] {
-            "",
-            "",
-            "http://taogu91.oss-cn-qingdao.aliyuncs.com/hospital_image/1432103365156xOrVLjbk.jpg",
-            "http://taogu91.oss-cn-qingdao.aliyuncs.com/hospital_image/1432120532452tBUmhDfO.png",
-            "http://taogu91.oss-cn-qingdao.aliyuncs.com/hospital_image/1432204496071TmjbjwkQ.png",
-            "http://taogu91.oss-cn-qingdao.aliyuncs.com/image_upload_plugin_image/1429187163420iOVgfjqR.jpg",
-            "http://taogu91.oss-cn-qingdao.aliyuncs.com/hospital_image/1433303972523WstgAtEv.jpg",
-    };
-    private static final String[] PKG_NAME = new String[] {
-            "com.yht.b",
-            "com.yht.c",
-            "com.xinxiang.center",
-            "com.anyang.traditional",
-            "com.shangqiu.first",
-            "com.zhumadian.first",
-            "com.pingdingshan.first",
-    };
-
-    private static List<Movie> movieList;
-    private static List<Movie> emptyList = new ArrayList<Movie>();
-    static {
-        movieList = new ArrayList<Movie>();
-        for (int i = 0; i < TITLES.length; i++) {
-            Movie movie = new Movie(Movie.instanceId(i), TITLES[i], IMAGES[i]);
-            movie.setPkgName(PKG_NAME[i]);
-            movieList.add(movie);
-        }
-    }
+//    private static final String[] TITLES = new String[] {
+//            "桃谷医院专家",
+//            "桃谷医院",
+//            "新乡市中心医院",
+//            "安阳市中医院",
+//            "商丘市第一人民医院",
+//            "驻马店市第一人民医院",
+//            "平顶山市第一人民医院",
+//    };
+//    private static final String[] IMAGES = new String[] {
+//            "",
+//            "",
+//            "http://taogu91.oss-cn-qingdao.aliyuncs.com/hospital_image/1432103365156xOrVLjbk.jpg",
+//            "http://taogu91.oss-cn-qingdao.aliyuncs.com/hospital_image/1432120532452tBUmhDfO.png",
+//            "http://taogu91.oss-cn-qingdao.aliyuncs.com/hospital_image/1432204496071TmjbjwkQ.png",
+//            "http://taogu91.oss-cn-qingdao.aliyuncs.com/image_upload_plugin_image/1429187163420iOVgfjqR.jpg",
+//            "http://taogu91.oss-cn-qingdao.aliyuncs.com/hospital_image/1433303972523WstgAtEv.jpg",
+//    };
+//    private static final String[] PKG_NAME = new String[] {
+//            "com.yht.b",
+//            "com.yht.c",
+//            "com.xinxiang.center",
+//            "com.anyang.traditional",
+//            "com.shangqiu.first",
+//            "com.zhumadian.first",
+//            "com.pingdingshan.first",
+//    };
+//
+//    private static List<Movie> movieList;
+//    private static List<Movie> emptyList = new ArrayList<Movie>();
+//    static {
+//        movieList = new ArrayList<Movie>();
+//        for (int i = 0; i < TITLES.length; i++) {
+//            Movie movie = new Movie(Movie.instanceId(i), TITLES[i], IMAGES[i]);
+//            movie.setPkgName(PKG_NAME[i]);
+//            movieList.add(movie);
+//        }
+//    }
 }
