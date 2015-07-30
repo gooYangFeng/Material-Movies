@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.hackvg.android.test.views.activity;
+package com.hackvg.android.test.views.activities;
 
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.ViewActions;
