@@ -113,7 +113,7 @@ public class MovieDetailActivity extends Activity implements DetailView,
     List<TextView> movieHeaders;
 
     @Bind(R.id.activity_detail_title)             TextView  mTitle;
-    @Bind(R.id.activity_detail_fab)               ImageView mFabButton;
+    @Bind(R.id.activity_detail_fab)               View mFabButton;
     @Bind(R.id.activity_detail_container)         View mInformationContainer;
     @Bind(R.id.item_movie_cover)                  ImageView mCoverImageView;
     @Bind(R.id.activity_detail_conf_image)        ImageView mConfirmationView;
