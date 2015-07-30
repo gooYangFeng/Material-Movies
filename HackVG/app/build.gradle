@@ -43,12 +43,12 @@ dependencies {
     compile project(':domain')
 
     // Google libraries
-    compile 'com.android.support:cardview-v7:21.0.3'
-    compile 'com.android.support:appcompat-v7:22.0.0'
-    compile 'com.android.support:recyclerview-v7:21.0.3'
-    compile 'com.android.support:palette-v7:21.0.0'
-    compile 'com.android.support:support-v13:21.0.3'
-    compile 'com.android.support:support-v4:22.0.0'
+    compile 'com.android.support:cardview-v7:+'
+    compile 'com.android.support:appcompat-v7:+'
+    compile 'com.android.support:recyclerview-v7:+'
+    compile 'com.android.support:palette-v7:+'
+    compile 'com.android.support:support-v13:+'
+    compile 'com.android.support:design:+'
 
     // Dagger compiler
     apt 'com.google.dagger:dagger-compiler:2.0'
@@ -69,11 +69,11 @@ dependencies {
 //    androidTestCompile 'com.android.support.test:runner:0.2'
 
     // Square libraries
-    compile 'com.squareup.picasso:picasso:2.4.0'
-    compile 'com.jakewharton:butterknife:6.0.0'
+    compile 'com.squareup.picasso:picasso:+'
+    compile 'com.jakewharton:butterknife:+'
 
     // Third party libraries
-    compile 'com.nispok:snackbar:2.9.1'
+//    compile 'com.nispok:snackbar:2.9.1'
 }
 
   android {
