@@ -56,7 +56,7 @@ dependencies {
 
     // Square libraries
     compile 'com.squareup.picasso:picasso:2.4.0'
-    compile 'com.jakewharton:butterknife:6.0.0'
+    compile 'com.jakewharton:butterknife:+'
 
     // Third party libraries
     compile 'com.nispok:snackbar:2.9.1'

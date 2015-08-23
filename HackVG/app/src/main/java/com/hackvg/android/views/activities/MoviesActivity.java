@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -40,9 +41,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
-import butterknife.Optional;
 
 
 public class MoviesActivity extends ActionBarActivity implements
@@ -62,10 +62,10 @@ public class MoviesActivity extends ActionBarActivity implements
 
     public float mBackgroundTranslation;
 
-    @Optional @InjectView(R.id.activity_movies_background_view) View mTabletBackground;
-    @InjectView(R.id.activity_movies_toolbar)                   Toolbar mToolbar;
-    @InjectView(R.id.activity_movies_progress)                  ProgressBar mProgressBar;
-    @InjectView(R.id.activity_movies_recycler)                  RecyclerView mRecycler;
+    @Nullable @Bind(R.id.activity_movies_background_view) View mTabletBackground;
+    @Bind(R.id.activity_movies_toolbar)                   Toolbar mToolbar;
+    @Bind(R.id.activity_movies_progress)                  ProgressBar mProgressBar;
+    @Bind(R.id.activity_movies_recycler)                  RecyclerView mRecycler;
     @Inject MoviesPresenter mMoviesPresenter;
 
     @Override
@@ -73,7 +73,7 @@ public class MoviesActivity extends ActionBarActivity implements
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         initializeDependencyInjector();
         initializeToolbar();

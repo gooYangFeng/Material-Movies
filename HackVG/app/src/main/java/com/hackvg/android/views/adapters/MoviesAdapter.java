@@ -19,6 +19,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 
 public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
 
@@ -101,16 +104,16 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
 class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnTouchListener{
 
     private final RecyclerViewClickListener onClickListener;
-    TextView titleTextView;
-    TextView authorTextView;
-    ImageView coverImageView;
+
+    @Bind(R.id.item_movie_title) TextView titleTextView;
+    @Bind(R.id.item_movie_cover) ImageView coverImageView;
 
     public MovieViewHolder(View itemView, RecyclerViewClickListener onClickListener) {
 
         super(itemView);
 
-        titleTextView = (TextView) itemView.findViewById(R.id.item_movie_title);
-        coverImageView = (ImageView) itemView.findViewById(R.id.item_movie_cover);
+        ButterKnife.bind(this, itemView);
+
         coverImageView.setDrawingCacheEnabled(true);
         coverImageView.setOnTouchListener(this);
         this.onClickListener = onClickListener;
