@@ -14,14 +14,20 @@
         tools:context=".MainActivity"
         >
 
-        <com.hackvg.android.views.custom_views.AutofitRecyclerView
-            android:id="@+id/activity_movies_recycler"
+        <com.hackvg.android.views.custom_views.MultiSwipeRefreshLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/swiperefresh"
             android:layout_width="match_parent"
-            android:paddingTop="?android:attr/actionBarSize"
-            android:columnWidth="@dimen/item_movie_width"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            />
+            android:layout_height="match_parent">
+            <com.hackvg.android.views.custom_views.AutofitRecyclerView
+                android:id="@+id/activity_movies_recycler"
+                android:layout_width="match_parent"
+                android:paddingTop="?android:attr/actionBarSize"
+                android:columnWidth="@dimen/item_movie_width"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                />
+        </com.hackvg.android.views.custom_views.MultiSwipeRefreshLayout>
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/activity_movies_toolbar"

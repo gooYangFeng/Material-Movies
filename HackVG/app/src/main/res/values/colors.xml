@@ -6,4 +6,9 @@
     <color name="theme_window_background">#363F44</color>
 
     <color name="movie_placeholder">#ff4e5d64</color>
+
+    <color name="swipe_color_1">#B6DB49</color>
+    <color name="swipe_color_2">#99CC00</color>
+    <color name="swipe_color_3">#8ABD00</color>
+    <color name="swipe_color_4">#7CAF00</color>
 </resources>

@@ -8,13 +8,17 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.Pair;
 import android.util.SparseArray;
 import android.view.View;
@@ -32,20 +36,30 @@ import com.hackvg.android.mvp.views.MoviesView;
 import com.hackvg.android.utils.RecyclerInsetsDecoration;
 import com.hackvg.android.utils.RecyclerViewClickListener;
 import com.hackvg.android.views.adapters.MoviesAdapter;
+import com.hackvg.android.views.custom_views.MultiSwipeRefreshLayout;
 import com.hackvg.android.views.fragments.NavigationDrawerFragment;
 import com.hackvg.model.entities.Movie;
 import com.hackvg.model.entities.MoviesWrapper;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.android.schedulers.HandlerScheduler;
+import rx.exceptions.OnErrorThrowable;
+import rx.functions.Func0;
 
+import static android.os.Process.THREAD_PRIORITY_BACKGROUND;
 
 public class MoviesActivity extends ActionBarActivity implements
     MoviesView, RecyclerViewClickListener, View.OnClickListener {
+    private static final String TAG = MoviesActivity.class.getSimpleName();
 
     public static SparseArray<Bitmap> sPhotoCache = new SparseArray<Bitmap>(1);
 
@@ -65,7 +79,11 @@ public class MoviesActivity extends ActionBarActivity implements
     @Bind(R.id.activity_movies_toolbar)                   Toolbar mToolbar;
     @Bind(R.id.activity_movies_progress)                  ProgressBar mProgressBar;
     @Bind(R.id.activity_movies_recycler)                  RecyclerView mRecycler;
+    @Bind(R.id.swiperefresh) MultiSwipeRefreshLayout mSwipeRefreshLayout;
+
     @Inject MoviesPresenter mMoviesPresenter;
+
+    private Handler backgroundHandler;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -102,9 +120,29 @@ public class MoviesActivity extends ActionBarActivity implements
     }
 
     private void initializeRecycler() {
-
         mRecycler.addItemDecoration(new RecyclerInsetsDecoration(this));
         mRecycler.setOnScrollListener(recyclerScrollListener);
+        // Set the color scheme of the SwipeRefreshLayout by providing 4 color resource ids
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.swipe_color_1, R.color.swipe_color_2,
+                R.color.swipe_color_3, R.color.swipe_color_4);
+        // END_INCLUDE (change_colors)
+
+        mSwipeRefreshLayout.setSwipeableChildren(android.R.id.list);
+
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.i(TAG, "onRefresh called from SwipeRefreshLayout");
+
+                initiateRefresh();
+            }
+        });
+
+
+        BackgroundThread backgroundThread = new BackgroundThread();
+        backgroundThread.start();
+        backgroundHandler = new Handler(backgroundThread.getLooper());
+
     }
 
     private void initializeDrawer() {
@@ -352,5 +390,71 @@ public class MoviesActivity extends ActionBarActivity implements
 
         super.onStop();
         mMoviesPresenter.stop();
+    }
+
+    private void onRefreshComplete(List<String> result) {
+        Log.i(TAG, "onRefreshComplete");
+
+        // Remove all items from the ListAdapter, and then replace them with the new items
+//        mListAdapter.clear();
+//        for (String cheese : result) {
+//            mListAdapter.add(cheese);
+//        }
+
+        // Stop the refreshing indicator
+        mSwipeRefreshLayout.setRefreshing(false);
+    }
+    // END_INCLUDE (refresh_complete)
+
+    private void initiateRefresh() {
+        Log.i(TAG, "initiateRefresh");
+
+        /**
+         * Execute the background task, which uses {@link android.os.AsyncTask} to load the data.
+         */
+        // todo
+//        new DummyBackgroundTask().execute();
+        sampleObservable()
+                // Run on a background thread
+                .subscribeOn(HandlerScheduler.from(backgroundHandler))
+                        // Be notified on the main thread
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.d(TAG, "onCompleted()");
+                        onRefreshComplete(null);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "onError()", e);
+                    }
+
+                    @Override
+                    public void onNext(String string) {
+                        Log.d(TAG, "onNext(" + string + ")");
+                    }
+                });
+    }
+
+    static Observable<String> sampleObservable() {
+        return Observable.defer(new Func0<Observable<String>>() {
+            @Override public Observable<String> call() {
+                try {
+                    // Do some long running operation
+                    Thread.sleep(TimeUnit.SECONDS.toMillis(3));
+                } catch (InterruptedException e) {
+                    throw OnErrorThrowable.from(e);
+                }
+                return Observable.just("one", "two", "three", "four", "five");
+            }
+        });
+    }
+
+    static class BackgroundThread extends HandlerThread {
+        BackgroundThread() {
+            super("SchedulerSample-BackgroundThread", THREAD_PRIORITY_BACKGROUND);
+        }
     }
 }
