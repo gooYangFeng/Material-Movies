@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -34,8 +35,6 @@ import com.hackvg.android.views.adapters.MoviesAdapter;
 import com.hackvg.android.views.fragments.NavigationDrawerFragment;
 import com.hackvg.model.entities.Movie;
 import com.hackvg.model.entities.MoviesWrapper;
-import com.nispok.snackbar.Snackbar;
-import com.nispok.snackbar.SnackbarManager;
 
 import java.util.List;
 
@@ -114,7 +113,7 @@ public class MoviesActivity extends ActionBarActivity implements
             getFragmentManager().findFragmentById(R.id.navigation_drawer);
 
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
-            (DrawerLayout) findViewById(R.id.drawer_layout));
+                (DrawerLayout) findViewById(R.id.drawer_layout));
     }
 
     private void initializeToolbar() {
@@ -123,7 +122,7 @@ public class MoviesActivity extends ActionBarActivity implements
         getSupportActionBar().setTitle("");
 
         getSupportActionBar().setHomeAsUpIndicator(
-            R.drawable.ic_menu_white_24dp);
+                R.drawable.ic_menu_white_24dp);
 
         mToolbar.setNavigationOnClickListener(this);
     }
@@ -178,23 +177,39 @@ public class MoviesActivity extends ActionBarActivity implements
         mProgressBar.setVisibility(View.GONE);
     }
 
+    Snackbar loadingSnackBar;
     @Override
     public void showLoadingLabel() {
+        if (null == loadingSnackBar) {
+            loadingSnackBar = Snackbar.make(getWindow().getDecorView(),
+                    R.string.activity_movies_message_more_films, Snackbar.LENGTH_INDEFINITE)
+                    .setAction(R.string.action_cancel, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
 
-        Snackbar loadingSnackBar = Snackbar.with(this)
-            .text(getString(R.string.activity_movies_message_more_films))
-            .actionLabel(getString(R.string.action_cancel))
-            .duration(Snackbar.SnackbarDuration.LENGTH_INDEFINITE)
-            .color(getResources().getColor(R.color.theme_primary))
-            .actionColor(getResources().getColor(R.color.theme_accent));
-
-        SnackbarManager.show(loadingSnackBar);
+                        }
+                    });
+//                    .text(getString(R.string.activity_movies_message_more_films))
+//                    .actionLabel(getString(R.string.action_cancel))
+//                    .duration(Snackbar.LENGTH_INDEFINITE)
+//                    .color(getResources().getColor(R.color.theme_primary))
+//                    .actionColor(getResources().getColor(R.color.theme_accent));
+        }
+//        Snackbar.make(rootLayout, "Hello. I am Snackbar!", Snackbar.LENGTH_SHORT)
+//                .setAction("Undo", new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//
+//                    }
+//                })
+        loadingSnackBar.show();
     }
 
     @Override
     public void hideActionLabel() {
-
-        SnackbarManager.dismiss();
+        if (null != loadingSnackBar) {
+            loadingSnackBar.dismiss();
+        }
     }
 
     @Override

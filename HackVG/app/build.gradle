@@ -2,8 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    compileSdkVersion 23
+    buildToolsVersion "23"
 
     aaptOptions {
         useNewCruncher false
@@ -19,8 +19,8 @@ android {
         testApplicationId "com.hackvg.android.test"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        minSdkVersion 16
-        targetSdkVersion 21
+        minSdkVersion 11
+        targetSdkVersion 23
         versionCode 2
         versionName "0.6"
     }
@@ -36,30 +36,24 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':domain')
-
     // Google libraries
-    compile 'com.android.support:cardview-v7:21.0.3'
-    compile 'com.android.support:appcompat-v7:22.0.0'
-    compile 'com.android.support:recyclerview-v7:21.0.3'
-    compile 'com.android.support:palette-v7:21.0.0'
-    compile 'com.android.support:support-v13:21.0.3'
-    compile 'com.android.support:support-v4:22.0.0'
-
+    compile 'com.android.support:cardview-v7:+'
+    compile 'com.android.support:appcompat-v7:+'
+    compile 'com.android.support:recyclerview-v7:+'
+    compile 'com.android.support:palette-v7:+'
+//    compile 'com.android.support:support-v13:+'
+    compile 'com.android.support:support-v4:+'
+    compile 'com.android.support:design:+'
     // Dagger compiler
     apt 'com.google.dagger:dagger-compiler:2.0'
-
     androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'
-    androidTestCompile ('com.android.support.test.espresso:espresso-contrib:2.0') {
+    androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.0') {
         exclude module: 'support-annotations'
     }
-
     // Square libraries
     compile 'com.squareup.picasso:picasso:2.4.0'
     compile 'com.jakewharton:butterknife:+'
-
     // Third party libraries
-    compile 'com.nispok:snackbar:2.9.1'
-
-
+//    compile 'com.nispok:snackbar:2.9.1'
 }
