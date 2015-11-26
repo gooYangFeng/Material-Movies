@@ -26,6 +26,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v7.graphics.Palette;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -62,11 +63,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
-import butterknife.InjectViews;
 import butterknife.OnClick;
-import butterknife.Optional;
 
 import static android.support.v7.graphics.Palette.Swatch;
 import static android.widget.LinearLayout.LayoutParams;
@@ -97,7 +96,7 @@ public class MovieDetailActivity extends Activity implements DetailView,
     private Swatch mBrightSwatch;
 
 
-    @InjectViews({
+    @Bind({
         R.id.activity_detail_content,
         R.id.activity_detail_homepage,
         R.id.activity_detail_company,
@@ -106,23 +105,23 @@ public class MovieDetailActivity extends Activity implements DetailView,
     })
     List<TextView> mMovieInfoTextViews;
 
-    @InjectViews({
+    @Bind({
         R.id.activity_detail_header_tagline,
         R.id.activity_detail_header_description,
         R.id.activity_detail_header_reviews
     })
     List<TextView> movieHeaders;
 
-    @InjectView(R.id.activity_detail_title)             TextView  mTitle;
-    @InjectView(R.id.activity_detail_fab)               ImageView mFabButton;
-    @InjectView(R.id.activity_detail_container)         View mInformationContainer;
-    @InjectView(R.id.item_movie_cover)                  ImageView mCoverImageView;
-    @InjectView(R.id.activity_detail_conf_image)        ImageView mConfirmationView;
-    @Optional @InjectView(R.id.activity_detail_image)   ImageView mMovieImageView;
-    @InjectView(R.id.activity_detail_conf_container)    FrameLayout mConfirmationContainer;
-    @InjectView(R.id.activity_detail_book_info)         LinearLayout mMovieDescriptionContainer;
+    @Bind(R.id.activity_detail_title)             TextView  mTitle;
+    @Bind(R.id.activity_detail_fab)               ImageView mFabButton;
+    @Bind(R.id.activity_detail_container)         View mInformationContainer;
+    @Bind(R.id.item_movie_cover)                  ImageView mCoverImageView;
+    @Bind(R.id.activity_detail_conf_image)        ImageView mConfirmationView;
+    @Nullable @Bind(R.id.activity_detail_image)   ImageView mMovieImageView;
+    @Bind(R.id.activity_detail_conf_container)    FrameLayout mConfirmationContainer;
+    @Bind(R.id.activity_detail_book_info)         LinearLayout mMovieDescriptionContainer;
 
-    @InjectView(R.id.activity_detail_scroll)            ObservableScrollView mObservableScrollView;
+    @Bind(R.id.activity_detail_scroll)            ObservableScrollView mObservableScrollView;
     private int[] mViewLastLocation;
 
 
@@ -131,7 +130,7 @@ public class MovieDetailActivity extends Activity implements DetailView,
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         mIsTablet = getContext().getResources().getBoolean(
             R.bool.is_tablet);
@@ -519,11 +518,10 @@ public class MovieDetailActivity extends Activity implements DetailView,
     }
 
     private void setVibrantElements(Swatch vibrantSwatch) {
-
-        mFabButton.getBackground().setColorFilter(vibrantSwatch.getRgb(),
-            PorterDuff.Mode.MULTIPLY);
-
-
+        if (null != vibrantSwatch) {
+            mFabButton.getBackground().setColorFilter(vibrantSwatch.getRgb(),
+                    PorterDuff.Mode.MULTIPLY);
+        }
 
     }
 
