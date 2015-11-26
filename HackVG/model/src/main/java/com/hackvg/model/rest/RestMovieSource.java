@@ -10,9 +10,7 @@ import com.hackvg.model.entities.ReviewsWrapper;
 import com.squareup.otto.Bus;
 
 import retrofit.Callback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import retrofit.Response;
 
 /**
  * Created by saulmm on 31/01/15.
@@ -23,13 +21,7 @@ public class RestMovieSource implements RestDataSource {
     private final Bus bus;
 
     public RestMovieSource(Bus bus) {
-
-        RestAdapter movieAPIRest = new RestAdapter.Builder()
-            .setEndpoint(Constants.MOVIE_DB_HOST)
-            .setLogLevel(RestAdapter.LogLevel.HEADERS_AND_ARGS)
-            .build();
-
-        moviesDBApi = movieAPIRest.create(MovieDatabaseAPI.class);
+        moviesDBApi = RestClient.getClient();
         this.bus = bus;
     }
 
@@ -55,7 +47,6 @@ public class RestMovieSource implements RestDataSource {
 
     @Override
     public void getConfiguration() {
-
         moviesDBApi.getConfiguration(Constants.API_KEY, retrofitCallback);
     }
 
@@ -68,39 +59,41 @@ public class RestMovieSource implements RestDataSource {
 
     public Callback retrofitCallback = new Callback() {
         @Override
-        public void success(Object o, Response response) {
+        public void onResponse(Response response) {
+            if (response.isSuccess()) {
+                // request successful (status code 200, 201)
+                Object o = response.body();
 
-            if (o instanceof MovieDetail) {
+                if (o instanceof MovieDetail) {
+                    MovieDetail detailResponse = (MovieDetail) o;
+                    bus.post(detailResponse);
 
-                MovieDetail detailResponse = (MovieDetail) o;
-                bus.post(detailResponse);
+                } else if (o instanceof MoviesWrapper) {
+                    MoviesWrapper moviesApiResponse = (MoviesWrapper) o;
+                    bus.post(moviesApiResponse);
 
-            } else if (o instanceof MoviesWrapper) {
+                } else if (o instanceof ConfigurationResponse) {
+                    ConfigurationResponse configurationResponse = (ConfigurationResponse) o;
+                    bus.post(configurationResponse);
 
-                MoviesWrapper moviesApiResponse = (MoviesWrapper) o;
-                bus.post(moviesApiResponse);
+                } else if (o instanceof ReviewsWrapper) {
+                    ReviewsWrapper reviewsWrapper = (ReviewsWrapper) o;
+                    bus.post(reviewsWrapper);
 
-            } else if (o instanceof ConfigurationResponse) {
+                } else if (o instanceof ImagesWrapper) {
+                    ImagesWrapper imagesWrapper = (ImagesWrapper) o;
+                    bus.post(imagesWrapper);
+                }
+            } else {
+                // response received but request not successful (like 400,401,403 etc)
+                //Handle errors
 
-                ConfigurationResponse configurationResponse = (ConfigurationResponse) o;
-                bus.post(configurationResponse);
-
-            } else if (o instanceof ReviewsWrapper) {
-
-                ReviewsWrapper reviewsWrapper = (ReviewsWrapper) o;
-                bus.post(reviewsWrapper);
-
-            } else if (o instanceof ImagesWrapper) {
-
-                ImagesWrapper imagesWrapper = (ImagesWrapper) o;
-                bus.post(imagesWrapper);
             }
         }
 
         @Override
-        public void failure(RetrofitError error) {
-
-            System.out.printf("[DEBUG] RestMovieSource failure - " + error.getMessage());
+        public void onFailure(Throwable t) {
+            System.out.printf("[DEBUG] RestMovieSource failure - " + t.getMessage());
         }
     };
 
