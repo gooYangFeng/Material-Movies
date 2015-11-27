@@ -70,20 +70,6 @@ public class MoviesActivity extends ActionBarActivity implements
     public final static String EXTRA_MOVIE_POSITION = "movie_position";
     public final static String SHARED_ELEMENT_COVER = "cover";
 
-    @Bind(R.id.activity_movies_recycler)
-    AutofitRecyclerView mRecycler;
-    @Bind(R.id.activity_movies_toolbar)
-    Toolbar mToolbar;
-    @Bind(R.id.activity_movies_progress)
-    ProgressBar mProgressBar;
-//    @Bind(R.id.navigation_drawer)
-//    NavigationDrawerFragment navigationDrawer;
-//    @Bind(R.id.drawer_layout)
-//    DrawerLayout drawerLayout;
-    @Nullable
-    @Bind(R.id.activity_movies_background_view)
-    View mTabletBackground;
-
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private MoviesAdapter mMoviesAdapter;
 
