@@ -22,6 +22,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -48,8 +49,6 @@ import com.hackvg.android.views.custom_views.AutofitRecyclerView;
 import com.hackvg.android.views.fragments.NavigationDrawerFragment;
 import com.hackvg.model.entities.Movie;
 import com.hackvg.model.entities.MoviesWrapper;
-import com.nispok.snackbar.Snackbar;
-import com.nispok.snackbar.SnackbarManager;
 
 import java.util.List;
 
@@ -90,8 +89,13 @@ public class MoviesActivity extends ActionBarActivity implements
 
     public float mBackgroundTranslation;
 
-    @Inject
-    MoviesPresenter mMoviesPresenter;
+    @Nullable @Bind(R.id.activity_movies_background_view) View mTabletBackground;
+    @Bind(R.id.activity_movies_toolbar)                   Toolbar mToolbar;
+    @Bind(R.id.activity_movies_progress)                  ProgressBar mProgressBar;
+    @Bind(R.id.activity_movies_recycler)                  RecyclerView mRecycler;
+    @Inject MoviesPresenter mMoviesPresenter;
+
+    Snackbar mSnackBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -105,11 +109,11 @@ public class MoviesActivity extends ActionBarActivity implements
         initializeRecycler();
         initializeDrawer();
 
-        if (savedInstanceState == null)
+        if (savedInstanceState == null) {
             mMoviesPresenter.attachView(this);
-
-        else
+        } else {
             initializeFromParams(savedInstanceState);
+        }
     }
 
     @Override
@@ -128,7 +132,6 @@ public class MoviesActivity extends ActionBarActivity implements
     }
 
     private void initializeRecycler() {
-
         mRecycler.addItemDecoration(new RecyclerInsetsDecoration(this));
         mRecycler.setOnScrollListener(recyclerScrollListener);
     }
@@ -205,21 +208,19 @@ public class MoviesActivity extends ActionBarActivity implements
 
     @Override
     public void showLoadingLabel() {
-
-        Snackbar loadingSnackBar = Snackbar.with(this)
-                .text(getString(R.string.activity_movies_message_more_films))
-                .actionLabel(getString(R.string.action_cancel))
-                .duration(Snackbar.SnackbarDuration.LENGTH_INDEFINITE)
-                .color(getResources().getColor(R.color.theme_primary))
-                .actionColor(getResources().getColor(R.color.theme_accent));
-
-        SnackbarManager.show(loadingSnackBar);
+        mSnackBar = Snackbar.make(mRecycler, R.string.activity_movies_message_more_films, Snackbar.LENGTH_INDEFINITE)
+                .setAction(getString(R.string.action_cancel), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mSnackBar.dismiss();
+                    }
+                }).setActionTextColor(getResources().getColor(R.color.theme_accent));
+        mSnackBar.show();
     }
 
     @Override
     public void hideActionLabel() {
-
-        SnackbarManager.dismiss();
+        mSnackBar.dismiss();
     }
 
     @Override
