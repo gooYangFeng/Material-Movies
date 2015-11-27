@@ -27,34 +27,27 @@ public class RestMovieSource implements RestDataSource {
 
     @Override
     public void getMovies() {
-
-        moviesDBApi.getPopularMovies(Constants.API_KEY, retrofitCallback);
+        moviesDBApi.getPopularMovies(Constants.API_KEY).enqueue(retrofitCallback);
     }
 
     @Override
     public void getDetailMovie(String id) {
-
-        moviesDBApi.getMovieDetail(Constants.API_KEY, id,
-            retrofitCallback);
+        moviesDBApi.getMovieDetail(id, Constants.API_KEY).enqueue(retrofitCallback);
     }
 
     @Override
     public void getReviews(String id) {
-
-        moviesDBApi.getReviews(Constants.API_KEY, id,
-            retrofitCallback);
+        moviesDBApi.getReviews(id, Constants.API_KEY).enqueue(retrofitCallback);
     }
 
     @Override
     public void getConfiguration() {
-        moviesDBApi.getConfiguration(Constants.API_KEY, retrofitCallback);
+        moviesDBApi.getConfiguration(Constants.API_KEY).enqueue(retrofitCallback);
     }
 
     @Override
     public void getImages(String movieId) {
-
-        moviesDBApi.getImages(Constants.API_KEY, movieId,
-            retrofitCallback);
+        moviesDBApi.getImages(movieId, Constants.API_KEY).enqueue(retrofitCallback);
     }
 
     public Callback retrofitCallback = new Callback() {
@@ -99,11 +92,9 @@ public class RestMovieSource implements RestDataSource {
 
     @Override
     public void getMoviesByPage(int page) {
-
         moviesDBApi.getPopularMoviesByPage(
             Constants.API_KEY,
-            page + "",
-            retrofitCallback
-        );
+            page + ""
+        ).enqueue(retrofitCallback);
     }
 }
