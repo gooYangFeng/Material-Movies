@@ -55,7 +55,7 @@ public class RestClient {
             });
 
             Retrofit client = new Retrofit.Builder()
-                    .baseUrl(Constants.MOVIE_DB_HOST)
+                    .baseUrl("http://api.91taogu.com/")
                     .addConverter(String.class, new ToStringConverter())
                     .client(okClient)
                     .addConverterFactory(GsonConverterFactory.create())

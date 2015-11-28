@@ -15,11 +15,10 @@ import retrofit.http.Query;
  */
 public interface TgHealthyAPI {
     @Headers("User-Agent: RetrofitTg")
-    @GET("/3/movie/popular")
+    @GET("api?func=hospitalIntroduction")
     Call<IntroductionResponse> getIntroduction(
-            @Query("api_key") String apiKey
+            @Query("app") String appId
     );
-
 //    @GET("/3/movie/{id}")
 //    Call<MovieDetail> getMovieDetail(
 //            @Path("id") String id,
@@ -32,9 +31,9 @@ public interface TgHealthyAPI {
 //            @Query("page") String page
 //    );
 //
-    @GET("/3/configuration")
+    @GET("api?func=systemConfig")
     Call<SystemConfigResponse> getConfiguration(
-            @Query("api_key") String apiKey
+            @Query("app") String appId
     );
 //
 //    @GET("/3/movie/{id}/reviews")

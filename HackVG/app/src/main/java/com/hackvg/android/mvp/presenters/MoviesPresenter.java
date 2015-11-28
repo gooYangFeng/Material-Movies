@@ -19,6 +19,8 @@ import com.hackvg.android.mvp.views.MoviesView;
 import com.hackvg.common.utils.Constants;
 import com.hackvg.domain.ConfigurationUsecase;
 import com.hackvg.domain.GetMoviesUsecase;
+import com.hackvg.domain.TgSystemConfigurationUsecase;
+import com.hackvg.model.healthy.entities.SystemConfigResponse;
 import com.hackvg.model.movie.entities.MoviesWrapper;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
@@ -29,6 +31,7 @@ import javax.inject.Inject;
 public class MoviesPresenter extends Presenter {
 
     private final Bus mBus;
+    private TgSystemConfigurationUsecase mSystemConfigurationUsecase;
     private ConfigurationUsecase mConfigureUsecase;
     private GetMoviesUsecase mGetPopularShows;
     private MoviesView mMoviesView;
@@ -37,8 +40,8 @@ public class MoviesPresenter extends Presenter {
     private boolean mRegistered;
 
     @Inject
-    public MoviesPresenter(ConfigurationUsecase configurationUsecase, GetMoviesUsecase getMoviesUsecase, Bus bus) {
-
+    public MoviesPresenter(TgSystemConfigurationUsecase systemConfigurationUsecase, ConfigurationUsecase configurationUsecase, GetMoviesUsecase getMoviesUsecase, Bus bus) {
+        mSystemConfigurationUsecase = systemConfigurationUsecase;
         mConfigureUsecase   = configurationUsecase;
         mGetPopularShows    = getMoviesUsecase;
         mBus = bus;
@@ -73,6 +76,11 @@ public class MoviesPresenter extends Presenter {
         mGetPopularShows.execute();
     }
 
+    @Subscribe
+    public void onSystemConfigurationReady(SystemConfigResponse.SystemConfigEntity systemConfig) {
+        mMoviesView.showSystemConfiguration(systemConfig);
+    }
+
     public void onEndListReached () {
 
         mGetPopularShows.execute();
@@ -90,6 +98,7 @@ public class MoviesPresenter extends Presenter {
 
             mMoviesView.showLoading();
             mConfigureUsecase.execute();
+            mSystemConfigurationUsecase.execute();
         }
     }
 

@@ -46,6 +46,7 @@ import com.hackvg.android.utils.RecyclerInsetsDecoration;
 import com.hackvg.android.utils.RecyclerViewClickListener;
 import com.hackvg.android.views.adapters.MoviesAdapter;
 import com.hackvg.android.views.fragments.NavigationDrawerFragment;
+import com.hackvg.model.healthy.entities.SystemConfigResponse;
 import com.hackvg.model.movie.entities.Movie;
 import com.hackvg.model.movie.entities.MoviesWrapper;
 
@@ -193,6 +194,12 @@ public class MoviesActivity extends ActionBarActivity implements
 
     @Override
     public void showLoadingLabel() {
+        if (null == mSnackBar) {
+            // do nothing and go through to make new instance later.
+        } else {
+            mSnackBar.dismiss();
+        }
+
         mSnackBar = Snackbar.make(mRecycler, R.string.activity_movies_message_more_films, Snackbar.LENGTH_INDEFINITE)
                 .setAction(getString(R.string.action_cancel), new View.OnClickListener() {
                     @Override
@@ -347,5 +354,23 @@ public class MoviesActivity extends ActionBarActivity implements
 
         super.onStop();
         mMoviesPresenter.stop();
+    }
+
+    @Override
+    public void showSystemConfiguration(SystemConfigResponse.SystemConfigEntity systemConfig) {
+        if (null == mSnackBar) {
+            // do nothing and go through to make new instance later.
+        } else {
+            mSnackBar.dismiss();
+        }
+
+        mSnackBar = Snackbar.make(mRecycler, systemConfig.getName() + " V" + systemConfig.getAndroid_version(), Snackbar.LENGTH_INDEFINITE)
+                .setAction(getString(R.string.action_cancel), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mSnackBar.dismiss();
+                    }
+                }).setActionTextColor(getResources().getColor(R.color.theme_accent));
+        mSnackBar.show();
     }
 }

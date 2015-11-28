@@ -19,6 +19,9 @@ import com.hackvg.domain.ConfigurationUsecase;
 import com.hackvg.domain.ConfigurationUsecaseController;
 import com.hackvg.domain.GetMoviesUsecase;
 import com.hackvg.domain.GetMoviesUsecaseController;
+import com.hackvg.domain.TgSystemConfigurationUsecase;
+import com.hackvg.domain.TgSystemConfigurationUsecaseImpl;
+import com.hackvg.model.healthy.rest.RestHealthySource;
 import com.hackvg.model.movie.rest.RestMovieSource;
 import com.squareup.otto.Bus;
 
@@ -34,5 +37,9 @@ public class BasicMoviesUsecasesModule {
 
     @Provides GetMoviesUsecase provideMoviesUsecase (Bus bus, RestMovieSource movieSource) {
         return new GetMoviesUsecaseController(movieSource, bus);
+    }
+
+    @Provides TgSystemConfigurationUsecase provideSystemConfigurationCase(Bus bus, RestHealthySource healthySource) {
+        return new TgSystemConfigurationUsecaseImpl(healthySource, bus);
     }
 }

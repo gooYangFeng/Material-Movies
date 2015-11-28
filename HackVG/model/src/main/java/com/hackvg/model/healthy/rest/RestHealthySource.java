@@ -57,7 +57,7 @@ public class RestHealthySource implements TgHealthyDataSource {
 
                 if (o instanceof SystemConfigResponse) {
                     SystemConfigResponse configResponse = (SystemConfigResponse) o;
-                    bus.post(configResponse);
+                    bus.post(configResponse.getData());
 
                 } else if (o instanceof IntroductionResponse) {
                     IntroductionResponse introductionResponse = (IntroductionResponse) o;

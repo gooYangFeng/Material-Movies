@@ -15,6 +15,7 @@
  */
 package com.hackvg.android.mvp.views;
 
+import com.hackvg.model.healthy.entities.SystemConfigResponse;
 import com.hackvg.model.movie.entities.Movie;
 
 import java.util.List;
@@ -34,4 +35,6 @@ public interface MoviesView extends MVPView {
     boolean isTheListEmpty ();
 
     void appendMovies (List<Movie> movieList);
+
+    void showSystemConfiguration(SystemConfigResponse.SystemConfigEntity systemConfig);
 }
