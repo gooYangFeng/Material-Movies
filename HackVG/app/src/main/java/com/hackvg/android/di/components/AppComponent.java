@@ -18,6 +18,7 @@ package com.hackvg.android.di.components;
 
 import com.hackvg.android.di.modules.ApplicationModule;
 import com.hackvg.android.di.modules.DomainModule;
+import com.hackvg.model.healthy.rest.RestHealthySource;
 import com.hackvg.model.movie.rest.RestMovieSource;
 import com.squareup.otto.Bus;
 
@@ -35,4 +36,5 @@ public interface AppComponent {
     
     Bus bus();
     RestMovieSource restMovieSource();
+    RestHealthySource restHealthySource();
 }

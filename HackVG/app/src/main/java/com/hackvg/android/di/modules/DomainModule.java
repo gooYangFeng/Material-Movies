@@ -15,6 +15,7 @@
  */
 package com.hackvg.android.di.modules;
 
+import com.hackvg.model.healthy.rest.RestHealthySource;
 import com.hackvg.model.movie.rest.RestMovieSource;
 import com.squareup.otto.Bus;
 
@@ -32,4 +33,5 @@ public class DomainModule {
 
     @Provides @Singleton RestMovieSource provideDataSource (Bus bus) { return new RestMovieSource(bus); }
 
+    @Provides @Singleton RestHealthySource provideHealthySource (Bus bus) { return new RestHealthySource(bus); }
 }
