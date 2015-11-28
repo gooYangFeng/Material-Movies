@@ -14,9 +14,9 @@
 package com.hackvg.domain;
 
 
-import com.hackvg.model.entities.ImagesWrapper;
-import com.hackvg.model.entities.MovieDetail;
-import com.hackvg.model.entities.ReviewsWrapper;
+import com.hackvg.model.movie.entities.ImagesWrapper;
+import com.hackvg.model.movie.entities.MovieDetail;
+import com.hackvg.model.movie.entities.ReviewsWrapper;
 
 /**
  * Representation of an use case to get the details of a specific film

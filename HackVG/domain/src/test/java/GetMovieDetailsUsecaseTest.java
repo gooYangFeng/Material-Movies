@@ -1,7 +1,7 @@
 import com.hackvg.domain.GetMovieDetailUsecase;
 import com.hackvg.domain.GetMovieDetailUsecaseController;
-import com.hackvg.model.MediaDataSource;
-import com.hackvg.model.entities.MovieDetail;
+import com.hackvg.model.movie.MediaDataSource;
+import com.hackvg.model.movie.entities.MovieDetail;
 import com.squareup.otto.Bus;
 
 import org.junit.Before;

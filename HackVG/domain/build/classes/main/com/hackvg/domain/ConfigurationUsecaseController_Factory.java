@@ -1,6 +1,6 @@
 package com.hackvg.domain;
 
-import com.hackvg.model.MediaDataSource;
+import com.hackvg.model.movie.MediaDataSource;
 import com.squareup.otto.Bus;
 import dagger.internal.Factory;
 import javax.annotation.Generated;

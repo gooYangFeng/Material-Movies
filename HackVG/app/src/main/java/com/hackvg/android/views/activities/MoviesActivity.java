@@ -45,10 +45,9 @@ import com.hackvg.android.mvp.views.MoviesView;
 import com.hackvg.android.utils.RecyclerInsetsDecoration;
 import com.hackvg.android.utils.RecyclerViewClickListener;
 import com.hackvg.android.views.adapters.MoviesAdapter;
-import com.hackvg.android.views.custom_views.AutofitRecyclerView;
 import com.hackvg.android.views.fragments.NavigationDrawerFragment;
-import com.hackvg.model.entities.Movie;
-import com.hackvg.model.entities.MoviesWrapper;
+import com.hackvg.model.movie.entities.Movie;
+import com.hackvg.model.movie.entities.MoviesWrapper;
 
 import java.util.List;
 

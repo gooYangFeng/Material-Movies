@@ -1,6 +1,6 @@
 package com.hackvg.domain;
 
-import com.hackvg.model.rest.RestDataSource;
+import com.hackvg.model.movie.rest.RestDataSource;
 import com.squareup.otto.Bus;
 import dagger.internal.Factory;
 import javax.annotation.Generated;

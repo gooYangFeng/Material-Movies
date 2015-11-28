@@ -13,10 +13,10 @@
  */
 package com.hackvg.domain;
 
-import com.hackvg.model.MediaDataSource;
-import com.hackvg.model.entities.ImagesWrapper;
-import com.hackvg.model.entities.MovieDetail;
-import com.hackvg.model.entities.ReviewsWrapper;
+import com.hackvg.model.movie.MediaDataSource;
+import com.hackvg.model.movie.entities.ImagesWrapper;
+import com.hackvg.model.movie.entities.MovieDetail;
+import com.hackvg.model.movie.entities.ReviewsWrapper;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 

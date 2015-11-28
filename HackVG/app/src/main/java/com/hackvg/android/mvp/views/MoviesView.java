@@ -15,7 +15,7 @@
  */
 package com.hackvg.android.mvp.views;
 
-import com.hackvg.model.entities.Movie;
+import com.hackvg.model.movie.entities.Movie;
 
 import java.util.List;
 

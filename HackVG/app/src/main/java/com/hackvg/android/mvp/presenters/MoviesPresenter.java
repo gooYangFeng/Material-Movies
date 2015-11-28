@@ -19,7 +19,7 @@ import com.hackvg.android.mvp.views.MoviesView;
 import com.hackvg.common.utils.Constants;
 import com.hackvg.domain.ConfigurationUsecase;
 import com.hackvg.domain.GetMoviesUsecase;
-import com.hackvg.model.entities.MoviesWrapper;
+import com.hackvg.model.movie.entities.MoviesWrapper;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 

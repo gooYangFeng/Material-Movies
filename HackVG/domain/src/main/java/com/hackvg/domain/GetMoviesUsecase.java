@@ -13,7 +13,7 @@
  */
 package com.hackvg.domain;
 
-import com.hackvg.model.entities.MoviesWrapper;
+import com.hackvg.model.movie.entities.MoviesWrapper;
 
 /**
  * Representation of an use case to get the most popular movies

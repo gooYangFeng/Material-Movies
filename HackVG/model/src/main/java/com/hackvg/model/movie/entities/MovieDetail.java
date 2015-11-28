@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.hackvg.model.entities;
+package com.hackvg.model.movie.entities;
 
 import java.util.List;
 
@@ -34,7 +34,7 @@ public class MovieDetail {
     private List genres;
     private List spoken_languages;
     private List<Production_companies> production_companies;
-    private List<ImagesWrapper.MovieImage> movieImagesList;
+    private List<com.hackvg.model.movie.entities.ImagesWrapper.MovieImage> movieImagesList;
     private Number budget;
     private Number id;
     private Number popularity;
@@ -175,12 +175,12 @@ public class MovieDetail {
         return this.vote_count;
     }
 
-    public void setMovieImagesList(List<ImagesWrapper.MovieImage> movieImagesList) {
+    public void setMovieImagesList(List<com.hackvg.model.movie.entities.ImagesWrapper.MovieImage> movieImagesList) {
 
         this.movieImagesList = movieImagesList;
     }
 
-    public List<ImagesWrapper.MovieImage> getMovieImagesList() {
+    public List<com.hackvg.model.movie.entities.ImagesWrapper.MovieImage> getMovieImagesList() {
 
         return movieImagesList;
     }

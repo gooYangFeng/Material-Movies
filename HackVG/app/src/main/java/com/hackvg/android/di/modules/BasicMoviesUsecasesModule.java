@@ -19,7 +19,7 @@ import com.hackvg.domain.ConfigurationUsecase;
 import com.hackvg.domain.ConfigurationUsecaseController;
 import com.hackvg.domain.GetMoviesUsecase;
 import com.hackvg.domain.GetMoviesUsecaseController;
-import com.hackvg.model.rest.RestMovieSource;
+import com.hackvg.model.movie.rest.RestMovieSource;
 import com.squareup.otto.Bus;
 
 import dagger.Module;

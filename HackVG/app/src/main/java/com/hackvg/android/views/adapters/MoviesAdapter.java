@@ -25,7 +25,7 @@ import android.widget.TextView;
 
 import com.hackvg.android.R;
 import com.hackvg.android.utils.RecyclerViewClickListener;
-import com.hackvg.model.entities.Movie;
+import com.hackvg.model.movie.entities.Movie;
 import com.hackvg.common.utils.Constants;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;

@@ -18,7 +18,7 @@ package com.hackvg.android.di.components;
 
 import com.hackvg.android.di.modules.ApplicationModule;
 import com.hackvg.android.di.modules.DomainModule;
-import com.hackvg.model.rest.RestMovieSource;
+import com.hackvg.model.movie.rest.RestMovieSource;
 import com.squareup.otto.Bus;
 
 import javax.inject.Singleton;

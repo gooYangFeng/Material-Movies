@@ -56,7 +56,7 @@ import com.hackvg.android.views.custom_listeners.AnimatorAdapter;
 import com.hackvg.android.views.custom_listeners.TransitionAdapter;
 import com.hackvg.android.views.custom_views.ObservableScrollView;
 import com.hackvg.android.views.custom_views.ScrollViewListener;
-import com.hackvg.model.entities.Review;
+import com.hackvg.model.movie.entities.Review;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

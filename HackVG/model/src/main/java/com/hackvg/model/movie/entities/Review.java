@@ -11,42 +11,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.hackvg.model.entities;
+package com.hackvg.model.movie.entities;
 
-
-import java.util.List;
-
-// TODO Use a common wrapper with Reviews and Movies
-public class ReviewsWrapper {
+/**
+ * Created by saulmm on 04/03/15.
+ */
+public class Review {
 
     private String id;
-    private String page;
-    private List<Review> results;
-    private Number total_pages;
-    private Number total_results;
+    private String author;
+    private String content;
 
     public String getId() {
 
         return id;
     }
 
-    public String getPage() {
+    public String getAuthor() {
 
-        return page;
+        return author;
     }
 
-    public List<Review> getResults() {
+    public String getContent() {
 
-        return results;
+        return content;
     }
 
-    public Number getTotal_pages() {
+    @Override
+    public String toString() {
 
-        return total_pages;
-    }
-
-    public Number getTotal_results() {
-
-        return total_results;
+        return "Review{" +
+            "id='" + id + '\'' +
+            ", author='" + author + '\'' +
+            ", content='" + content + '\'' +
+            '}';
     }
 }

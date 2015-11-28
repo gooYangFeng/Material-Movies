@@ -13,7 +13,7 @@
  */
 package com.hackvg.domain;
 
-import com.hackvg.model.entities.ConfigurationResponse;
+import com.hackvg.model.movie.entities.ConfigurationResponse;
 
 /**
  * Representation of an use case to get the configuration parameters

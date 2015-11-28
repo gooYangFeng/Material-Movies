@@ -1,4 +1,4 @@
-package com.hackvg.model.rest;
+package com.hackvg.model.common;
 
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.RequestBody;

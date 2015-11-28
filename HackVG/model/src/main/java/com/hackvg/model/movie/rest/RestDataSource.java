@@ -1,6 +1,6 @@
-package com.hackvg.model.rest;
+package com.hackvg.model.movie.rest;
 
-import com.hackvg.model.MediaDataSource;
+import com.hackvg.model.movie.MediaDataSource;
 
 /**
  * Created by saulmm on 25/02/15.

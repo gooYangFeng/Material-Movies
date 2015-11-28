@@ -1,6 +1,6 @@
 import com.hackvg.domain.ConfigurationUsecase;
 import com.hackvg.domain.ConfigurationUsecaseController;
-import com.hackvg.model.MediaDataSource;
+import com.hackvg.model.movie.MediaDataSource;
 import com.squareup.otto.Bus;
 
 import org.junit.Before;

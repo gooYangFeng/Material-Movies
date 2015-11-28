@@ -23,10 +23,10 @@ import com.hackvg.android.mvp.views.DetailView;
 import com.hackvg.android.views.activities.MoviesActivity;
 import com.hackvg.common.utils.Constants;
 import com.hackvg.domain.GetMovieDetailUsecase;
-import com.hackvg.model.entities.ImagesWrapper;
-import com.hackvg.model.entities.MovieDetail;
-import com.hackvg.model.entities.Production_companies;
-import com.hackvg.model.entities.ReviewsWrapper;
+import com.hackvg.model.movie.entities.ImagesWrapper;
+import com.hackvg.model.movie.entities.MovieDetail;
+import com.hackvg.model.movie.entities.Production_companies;
+import com.hackvg.model.movie.entities.ReviewsWrapper;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 

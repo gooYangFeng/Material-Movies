@@ -1,6 +1,4 @@
-/*
- * Copyright (C) 2015 Saúl Molinero.
- *
+/**
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,23 +11,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.hackvg.android.di.modules;
+package com.hackvg.model.healthy;
 
-import com.hackvg.model.movie.rest.RestMovieSource;
-import com.squareup.otto.Bus;
-
-import javax.inject.Singleton;
-
-import dagger.Module;
-import dagger.Provides;
-
-@Module
-public class DomainModule {
-
-    @Provides @Singleton Bus provideBus () {
-        return new Bus();
-    }
-
-    @Provides @Singleton RestMovieSource provideDataSource (Bus bus) { return new RestMovieSource(bus); }
-
+public interface TgHealthyDataSource {
+    void getIntroduction(String appid);
+    void getConfiguration(String appid);
 }

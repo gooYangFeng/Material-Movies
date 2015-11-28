@@ -13,8 +13,8 @@
  */
 package com.hackvg.domain;
 
-import com.hackvg.model.MediaDataSource;
-import com.hackvg.model.entities.ConfigurationResponse;
+import com.hackvg.model.movie.MediaDataSource;
+import com.hackvg.model.movie.entities.ConfigurationResponse;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 

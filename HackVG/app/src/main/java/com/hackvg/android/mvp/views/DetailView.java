@@ -18,7 +18,7 @@ package com.hackvg.android.mvp.views;
 
 import android.graphics.Bitmap;
 
-import com.hackvg.model.entities.Review;
+import com.hackvg.model.movie.entities.Review;
 
 import java.util.List;
 

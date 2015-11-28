@@ -1,10 +1,10 @@
-package com.hackvg.model.rest;
+package com.hackvg.model.movie.rest;
 
-import com.hackvg.model.entities.ConfigurationResponse;
-import com.hackvg.model.entities.ImagesWrapper;
-import com.hackvg.model.entities.MovieDetail;
-import com.hackvg.model.entities.MoviesWrapper;
-import com.hackvg.model.entities.ReviewsWrapper;
+import com.hackvg.model.movie.entities.ConfigurationResponse;
+import com.hackvg.model.movie.entities.ImagesWrapper;
+import com.hackvg.model.movie.entities.MovieDetail;
+import com.hackvg.model.movie.entities.MoviesWrapper;
+import com.hackvg.model.movie.entities.ReviewsWrapper;
 
 import retrofit.Call;
 import retrofit.http.GET;
